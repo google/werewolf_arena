@@ -1,0 +1,321 @@
+<!doctype html>
+<meta charset="utf-8" />
+<script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+<script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+</script>
+<title>Werewolf</title>
+<style>
+    html {
+        font-family: "Google Sans", "Roboto", sans-serif;
+        background-color: #fafafa;
+    }
+
+    .bid_player-container {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .body {
+        overflow: hidden;
+    }
+
+    #header {
+        width: 100%;
+        height: 64px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #header div {
+        font-size: 12px;
+    }
+
+    .needs_whitespace {
+        white-space: pre-line;
+    }
+
+    .bid-bar {
+        background-color: #90caf9;
+        text-align: center;
+        font-family: monospace;
+        font-size: 12px;
+    }
+
+    .bar-0 {
+        background-color: transparent;
+        height: 20px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .thinking {
+        color: #9e9e9e;
+        font-style: italic;
+    }
+
+    #main-container {
+        display: flex;
+        flex-direction: row;
+        height: calc(100% - 80px);
+        min-height: calc(100% - 80px);
+        max-width: 100%;
+        position: absolute;
+        overflow-y: hidden;
+    }
+
+    #transcript-container,
+    #debug-container {
+        height: calc(100% - 80px);
+        min-height: calc(100% - 80px);
+        overflow-y: scroll;
+    }
+
+    #transcript-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-radius: 16px;
+    }
+
+    #transcript-wrapper {
+        width: 65%;
+    }
+
+    #debug-wrapper {
+        width: 20%;
+    }
+
+    #player-container {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    #transcript-container {
+        background-color: #eceff1;
+        padding-left: 32px;
+        padding-right: 32px;
+        gap: 16px;
+    }
+
+    .bidding,
+    .summarize,
+    .special {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 8px;
+        border-radius: 16px;
+        padding: 16px;
+        font-size: 14px;
+        background-color: white;
+    }
+
+    .bidding {
+        border-radius: 0;
+        height: 120px;
+        justify-items: center;
+        background-color: #e0e2e3;
+        padding: 0;
+        border-bottom: 1px solid black;
+        margin-top: 16px;
+        margin-bottom: 50px;
+        min-height: 100px;
+    }
+
+    .debate,
+    .summarize,
+    .special,
+    .voting,
+    .announcement {
+        background-color: white;
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow:
+            0px 3px 6px rgba(0, 0, 0, 0.16),
+            0px 3px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .Seer,
+    .Seer-short {
+        font-weight: bold;
+        color: green;
+    }
+
+    .Seer:after {
+        content: " (Seer)";
+    }
+
+    .Werewolf,
+    .Werewolf-short {
+        font-weight: bold;
+        color: red;
+    }
+
+    .Werewolf:after {
+        content: " (Wolf)";
+    }
+
+    .Doctor,
+    .Doctor-short {
+        font-weight: bold;
+        color: blue;
+    }
+
+    .Doctor:after {
+        content: " (Doctor)";
+    }
+
+    /* .Villager, .Villager-short {
+    font-weight:bold;
+    color: black;
+  } */
+
+    .round-header {
+        position: sticky;
+        top: 0px;
+        background-color: #eceff1;
+        margin: -10px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        font-size: 24px;
+    }
+
+    .active-element {
+        background-color: #ffeb3b;
+        border: 2px solid #ffeb3b;
+    }
+
+    .debate-icon,
+    .player-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .summarize-icon,
+    .vote-icon,
+    .bid-icon,
+    .exiled-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .name-and-image {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .exiled {
+        padding: 16px;
+        border-radius: 16px;
+        background-color: white;
+    }
+
+    .player-model {
+        font-size: 12px;
+        word-wrap: break-word;
+    }
+
+    .player-container-individual {
+        display: inline-block;
+        width: 135px;
+        height: 150px;
+        text-align: center;
+        word-wrap: break-word;
+        border-radius: 16px;
+        background-color: #eceff1;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #eeeeee;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    .divider {
+        text-align: center;
+        min-height: 80px;
+        align-content: center;
+    }
+
+    /* .round-0 {
+    color: #3949AB;
+  }
+  .round-1 {
+    color: #5E35B1
+  }
+  .round-2 {
+    color: #8E24AA;
+  }
+  .round-3 {
+    color: #D81B60;
+  }
+  .round-4 {
+    color: #D32F2F;
+  } */
+
+    .round-Day:after {
+        content: " 🌤️";
+    }
+
+    .round-Night:after {
+        content: " 💤";
+    }
+
+    .bid-note {
+        margin-top: 16px;
+        margin-bottom: -32px;
+        font-size: 12px;
+        font-family: monospace;
+        color: #4e4e4e;
+    }
+
+    table, th, td {
+  border: 1px solid black;
+}
+td {
+    align-content:flex-start;
+}
+</style>
+
+<body>
+    <div id="header">
+        <h2>Werewolf Data Viewer</h2>
+        <div id="game-file"></div>
+    </div>
+    <div id="main-container">
+        <div id="player-container">
+            <h3>Players</h3>
+        </div>
+        <div id="transcript-wrapper">
+            <h3>Game</h3>
+            <div id="transcript-container"></div>
+        </div>
+        <div id="debug-wrapper">
+            <h3>Debug</h3>
+            <div id="debug-container">
+                <p><i>Click something in the game history to see its debug data.</i></p>
+            </div>
+        </div>
+    </div>
+    <script src="static/index.js"></script>
+</body>

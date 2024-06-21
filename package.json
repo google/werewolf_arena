@@ -1,0 +1,11 @@
+{
+    "name": "werewolf_viewer",
+    "scripts": {
+        "build": "tsc index.ts --target es2022  --outDir static",
+        "start": "npm run build && http-server"
+    },
+    "devDependencies": {
+        "typescript": "5.4.5",
+        "http-server": "14.1.1"
+    }
+}
