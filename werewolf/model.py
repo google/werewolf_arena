@@ -440,7 +440,6 @@ class Round(Deserializable):
     votes:  Who each player voted to exile after each line of dialogue in the
       debate.
     bids: What each player bid to speak next during each turn in the debate.
-    summaries: Summary of the debate from each player's perspective.
     success (bool): Indicates whether the round was completed successfully.
 
   Methods:
