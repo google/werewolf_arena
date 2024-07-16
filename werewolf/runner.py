@@ -55,7 +55,6 @@ DEFAULT_WEREWOLF_MODELS = ["flash", "pro1.5"]
 DEFAULT_VILLAGER_MODELS = ["flash", "pro1.5"]
 RESUME_DIRECTORIES = []
 
-
 model_to_id = {
     "pro1.5": "gemini-1.5-pro-preview-0514",
     "flash": "gemini-1.5-flash-001",
@@ -63,9 +62,6 @@ model_to_id = {
     "gpt4": "gpt-4-turbo-2024-04-09",
     "gpt4o": "gpt-4o-2024-05-13",
     "gpt3.5": "gpt-3.5-turbo-0125",
-    "opus": "claude-3-opus@20240229",
-    "sonnet": "claude-3-sonnet@20240229",
-    "haiku": "claude-3-haiku@20240307",
 }
 
 
