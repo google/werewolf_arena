@@ -50,8 +50,10 @@ The games to be resumed are currently hardcoded in `runner.py`, and
 is defined as a list of directories where their states are saved.
 
 ## Launch the Interactive Viewer
+![alt text](viewer.png)
 
-Once a game is completed, you can use the interactive viewer to explore the gamelog. You can see players' private reasoning, bids, and votes, in addition to the debate transcripts in a nicely formatted UI.  
+Once a game is completed, you can use the interactive viewer to explore the gamelog. You can see players' private reasoning, bids, votes and prompts. 
+
  - `npm i`
  - `npm run start`
  - Open the browser, e.g. `http://localhost:8080/?session_id=session_20240610_084702`
