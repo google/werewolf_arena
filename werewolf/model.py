@@ -497,6 +497,7 @@ class State(Deserializable):
     players: List of players in the game.
     seer: The player with the seer role.
     doctor: The player with the doctor role.
+    villagers: List of players with the villager role.
     werewolves: List of players with the werewolf role.
     rounds: List of Rounds in the game.
     error_message: Contains an error message if the game failed during
@@ -589,21 +590,21 @@ class RoundLog(Deserializable):
   """Represents the logs of a round of gameplay in Werewolf.
 
   Attributes:
-    eliminate: Log of the eliminate action taken by werewolves.
-    investigate: Log of the invesetigate action taken by the seer.
-    protect: Log of the protect action taken by the doctor.
-    bid: Log of the biddings. The 1st element in the list is the bidding logs
+    eliminate: Logs from the eliminate action taken by werewolves.
+    investigate: Log from the invesetigate action taken by the seer.
+    protect: Log from the protect action taken by the doctor.
+    bid: Logs from the bidding actions. The 1st element in the list is the bidding logs
       for the 1st debate turn, the 2nd element is the logs for the 2nd debate
       turn, and so on. Every player bids to speak on every turn, so the element
       is a list too. The tuple contains the name of the player and the log of
       their bidding.
-    debate: Log of the debates. Each round has multiple debate turbns, so it's a
+    debate: Logs of the debates. Each round has multiple debate turbns, so it's a
       list. Each element is a tuple - the 1st element is the name of the player
       who spoke at this turn, and the 2nd element is the log.
     vote: Log of the votes. A list of logs, one for every player who voted. The
       1st element of the tuple is the name of the player, and the 2nd element is
       the log.
-    summarize: Log of the summarize step. Every player summarizes their
+    summaries: Logs from the summarize step. Every player summarizes their
       observations at the end of a round before they vote. Each element is a
       tuple where the 1st element is the name of the player, and the 2nd element
       is the log
