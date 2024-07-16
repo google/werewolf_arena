@@ -1,7 +1,6 @@
 # Werewolf The Social Deduction Game
 Use Werewolf to evaluate social reasoning skills in different LLMs by having them play each other.
 
-
 ## Set up the environment
 
 ### Create a Python Virtual Environment
@@ -34,13 +33,12 @@ The program will read from this environment variable.
  gcloud auth application-default login
  ```
 
-
 ## Run a single game
 
 `python3 main.py --run --v_models=pro1.5 --w_models=gpt4`
 
 
-## Run many games between all model combinations
+## Run games between all model combinations
 
 `python3 main.py --eval --num_games=5 --v_models=pro1.5,flash --w_models=gpt4,gpt4o`
 
@@ -51,9 +49,9 @@ The program will read from this environment variable.
 The games to be resumed are currently hardcoded in `runner.py`, and
 is defined as a list of directories where their states are saved.
 
-## Launch Interactive Viewer
+## Launch the Interactive Viewer
 
-The game runs in cli and saves log to a session folder. You can view the history of the game in UI once the game finishes.
+Once a game is completed, you can use the interactive viewer to explore the gamelog. You can see players' private reasoning, bids, and votes, in addition to the debate transcripts in a nicely formatted UI.  
  - `npm i`
  - `npm run start`
  - Open the browser, e.g. `http://localhost:8080/?session_id=session_20240610_084702`
