@@ -1,5 +1,5 @@
 # Werewolf The Social Deduction Game
-Use Werewolf to evaluate social reasoning skills in different LLMs by having them play each other.
+This repository provides code for [Werewolf Arena](https://arxiv.org/abs/2407.13943) - a framework for evaluating the social reasoning skills of large language models (LLMs) through the game of Werewolf.
 
 ## Set up the environment
 
